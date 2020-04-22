@@ -1,34 +1,37 @@
-// server.js
-// where your node app starts
+var port = process.env.PORT || 3000,
+    io = require('socket.io')(port),
+    gameSocket = null;
 
-// we've started you off with Express (https://expressjs.com/)
-// but feel free to use whatever libraries or frameworks you'd like through `package.json`.
-const express = require("express");
-const app = express();
+gameSocket = io.on('connection', function(socket){
+    console.log('socket connected: ' + socket.id);
 
-// our default array of dreams
-const dreams = [
-  "Find and count some sheep",
-  "Climb a really tall mountain",
-  "Wash the dishes"
-];
+    socket.on('disconnect', function(){
+        console.log('socket disconnected: ' + socket.id);
+    });
 
-// make all the files in 'public' available
-// https://expressjs.com/en/starter/static-files.html
-app.use(express.static("public"));
+    socket.on('test-event1', function(){
+        console.log('got test-event1');
+    });
 
-// https://expressjs.com/en/starter/basic-routing.html
-app.get("/", (request, response) => {
-  response.sendFile(__dirname + "/views/index.html");
-});
+    socket.on('test-event2', function(data){
+        console.log('got test-event2');
+        console.log(data);
 
-// send the default array of dreams to the webpage
-app.get("/dreams", (request, response) => {
-  // express helps us take JS objects and send them as JSON
-  response.json(dreams);
-});
+        socket.emit('test-event', {
+            test:12345,
+            test2: 'test emit event'
+        });
+    });
 
-// listen for requests :)
-const listener = app.listen(process.env.PORT, () => {
-  console.log("Your app is listening on port " + listener.address().port);
+    socket.on('test-event3', function(data, callback){
+        console.log('got test-event3');
+        console.log(data);
+
+        callback({
+            test: 123456,
+            test2: "test3"
+        });
+    });
+
+
 });

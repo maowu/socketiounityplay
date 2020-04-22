@@ -1,16 +1,14 @@
 {
-  "//1": "describes your app and its dependencies",
-  "//2": "https://docs.npmjs.com/files/package.json",
-  "//3": "updating this file will download and update your packages",
-  "name": "hello-express",
+  "name": "socketiounityplay",
   "version": "0.0.1",
-  "description": "A simple Node app built on Express, instantly up and running.",
+  "description": "A simple socket-io multiplayer server for unity game.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+		"socket.io": "*"
   },
   "engines": {
     "node": "12.x"
@@ -22,6 +20,7 @@
   "keywords": [
     "node",
     "glitch",
-    "express"
+    "express",
+    "socketio"
   ]
 }
