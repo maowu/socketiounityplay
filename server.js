@@ -26,7 +26,7 @@ gameSocket = io.on("connection", function(socket) {
         name: clients[i].name,
         position: clients[i].position,
         rotation: clients[i].position,
-        health: clients[i].health
+        color: clients[i].color
       };
       //	in your current game, we need to tell you about the other players.
       socket.emit("other player connected", playerConnected);
@@ -41,8 +41,6 @@ gameSocket = io.on("connection", function(socket) {
   socket.on('play', function(data) {
 		console.log(currentPlayer.name + ' recv: play: ' + JSON.stringify(data));
 		// if this is the first person to join the game init the enemies
-    
-    
 		if(clients.length === 0) {
 			playerSpawnPoints = [];
 			data.playerSpawnPoints.forEach(function(_playerSpawnPoint) {
@@ -101,28 +99,5 @@ gameSocket = io.on("connection", function(socket) {
 			}
 		}
 	});
-  
-  socket.on("test-event1", function() {
-    console.log("got test-event1");
-  });
 
-  socket.on("test-event2", function(data) {
-    console.log("got test-event2");
-    console.log(data);
-
-    socket.emit("test-event", {
-      test: 12345,
-      test2: "test emit event"
-    });
-  });
-
-  socket.on("test-event3", function(data, callback) {
-    console.log("got test-event3");
-    console.log(data);
-
-    callback({
-      test: 123456,
-      test2: "test3"
-    });
-  });
 });
