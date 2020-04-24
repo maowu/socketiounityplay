@@ -57,7 +57,7 @@ gameSocket = io.on("connection", function(socket) {
 			name:data.name,
 			position: randomSpawnPoint.position,
 			rotation: randomSpawnPoint.rotation,
-			health: 100
+			color: Math.floor(Math.random()*5)
 		};
 		clients.push(currentPlayer);
 		// in your current game, tell you that you have joined
@@ -84,7 +84,7 @@ gameSocket = io.on("connection", function(socket) {
 		var data = {
 			name: currentPlayer.name
 		};
-		console.log(currentPlayer.name +' bcst: shoot: '+JSON.stringify(data));
+		console.log(currentPlayer.name +' bcst: shoot: '+ JSON.stringify(data));
 		socket.emit('player shoot', data);
 		socket.broadcast.emit('player shoot', data);
 	});
