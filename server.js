@@ -58,6 +58,7 @@ gameSocket = io.on("connection", function(socket) {
 			position: randomSpawnPoint.position,
 			rotation: randomSpawnPoint.rotation,
 			//color: Math.floor(Math.random()*5)
+      color: 0
 		};
 		clients.push(currentPlayer);
 		// in your current game, tell you that you have joined
@@ -107,6 +108,16 @@ gameSocket = io.on("connection", function(socket) {
 		//console.log(currentPlayer.name +' bcst: drag: '+ JSON.stringify(data));
 		socket.emit('drawDrag', data);
 		socket.broadcast.emit('drawDrag', data);
+	});
+  
+  socket.on('colorChange', function(data) {
+		var data = {
+			name: currentPlayer.name,
+      color: data.color
+		};
+		//console.log(currentPlayer.name +' bcst: drag: '+ JSON.stringify(data));
+		socket.emit('colorChange', data);
+		socket.broadcast.emit('colorChange', data);
 	});
  
   socket.on('disconnect', function() {
