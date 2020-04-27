@@ -94,8 +94,8 @@ gameSocket = io.on("connection", function(socket) {
 			name: currentPlayer.name,
       position: data.position
 		};
-		console.log(currentPlayer.name +' bcst: shoot: '+ JSON.stringify(data));
-		//socket.emit('drawClick', data);
+		console.log(currentPlayer.name +' bcst: click: '+ JSON.stringify(data));
+		socket.emit('drawClick', data);
 		socket.broadcast.emit('drawClick', data);
 	});
  
