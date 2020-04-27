@@ -110,14 +110,14 @@ gameSocket = io.on("connection", function(socket) {
 		socket.broadcast.emit('drawDrag', data);
 	});
   
-  socket.on('colorChange', function(data) {
+  socket.on('changeColor', function(data) {
 		var data = {
 			name: currentPlayer.name,
       color: data.color
 		};
-		//console.log(currentPlayer.name +' bcst: drag: '+ JSON.stringify(data));
-		socket.emit('colorChange', data);
-		socket.broadcast.emit('colorChange', data);
+		console.log(currentPlayer.name +' bcst: change Color: '+ JSON.stringify(data));
+		socket.emit('changeColor', data);
+		socket.broadcast.emit('changeColor', data);
 	});
  
   socket.on('disconnect', function() {
