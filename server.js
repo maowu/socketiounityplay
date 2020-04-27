@@ -94,9 +94,19 @@ gameSocket = io.on("connection", function(socket) {
 			name: currentPlayer.name,
       position: data.position
 		};
-		console.log(currentPlayer.name +' bcst: click: '+ JSON.stringify(data));
+		//console.log(currentPlayer.name +' bcst: click: '+ JSON.stringify(data));
 		socket.emit('drawClick', data);
 		socket.broadcast.emit('drawClick', data);
+	});
+  
+  socket.on('drawDrag', function(data) {
+		var data = {
+			name: currentPlayer.name,
+      position: data.position
+		};
+		//console.log(currentPlayer.name +' bcst: drag: '+ JSON.stringify(data));
+		socket.emit('drawDrag', data);
+		socket.broadcast.emit('drawDrag', data);
 	});
  
   socket.on('disconnect', function() {
