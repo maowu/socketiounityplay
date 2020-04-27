@@ -57,7 +57,7 @@ gameSocket = io.on("connection", function(socket) {
 			name:data.name,
 			position: randomSpawnPoint.position,
 			rotation: randomSpawnPoint.rotation,
-			color: Math.floor(Math.random()*5)
+			//color: Math.floor(Math.random()*5)
 		};
 		clients.push(currentPlayer);
 		// in your current game, tell you that you have joined
