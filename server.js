@@ -88,6 +88,16 @@ gameSocket = io.on("connection", function(socket) {
 		socket.emit('player shoot', data);
 		socket.broadcast.emit('player shoot', data);
 	});
+  
+  socket.on('drawClick', function(data) {
+		var data = {
+			name: currentPlayer.name,
+      position: data.position
+		};
+		console.log(currentPlayer.name +' bcst: shoot: '+ JSON.stringify(data));
+		//socket.emit('drawClick', data);
+		socket.broadcast.emit('drawClick', data);
+	});
  
   socket.on('disconnect', function() {
 		console.log(currentPlayer.name +' recv: disconnect '+ currentPlayer.name);
