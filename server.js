@@ -1,5 +1,6 @@
 var express = require('express'),
     app = express(),
+    assets = require('./assets'),
     server = require('http').createServer(app),
     port = process.env.PORT || 3000,
     io = require("socket.io")(server);
@@ -8,11 +9,14 @@ var gameSocket = null;
 var clients = []; // Store Client list
 var playerSpawnPoints = [];
 
+// show html
 app.use(express.static("public"));
+app.use("/assets", assets);
 app.get("/", (request, response) => {
   response.sendFile(__dirname + "/views/index.html");
 });
 
+//socket.io server
 server.listen(5000, function(){
 	console.log('listening on *:5000  \n --- server is running ...');
 });
