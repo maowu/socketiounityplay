@@ -2,14 +2,20 @@ var express = require('express'),
     app = express(),
     server = require('http').createServer(app),
     port = process.env.PORT || 3000,
-    io = require("socket.io")(port),
-    gameSocket = null;
+    io = require("socket.io")(server);
+var gameSocket = null;
 
 var clients = []; // Store Client list
 var playerSpawnPoints = [];
 
 app.use(express.static("public"));
+app.get("/", (request, response) => {
+  response.sendFile(__dirname + "/views/index.html");
+});
 
+server.listen(3000, function(){
+	console.log('listening on *:3000  \n --- server is running ...');
+});
 
 gameSocket = io.on("connection", function(socket) {
   var currentPlayer = {};
