@@ -13,8 +13,8 @@ app.get("/", (request, response) => {
   response.sendFile(__dirname + "/views/index.html");
 });
 
-server.listen(3000, function(){
-	console.log('listening on *:3000  \n --- server is running ...');
+server.listen(5000, function(){
+	console.log('listening on *:5000  \n --- server is running ...');
 });
 
 gameSocket = io.on("connection", function(socket) {
