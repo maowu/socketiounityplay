@@ -1,9 +1,15 @@
-var port = process.env.PORT || 3000,
-  io = require("socket.io")(port),
-  gameSocket = null;
+var express = require('express'),
+    app = express(),
+    server = require('http').createServer(app),
+    port = process.env.PORT || 3000,
+    io = require("socket.io")(port),
+    gameSocket = null;
 
 var clients = []; // Store Client list
 var playerSpawnPoints = [];
+
+app.use(express.static("public"));
+
 
 gameSocket = io.on("connection", function(socket) {
   var currentPlayer = {};
